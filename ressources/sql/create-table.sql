@@ -1,9 +1,9 @@
 CREATE TABLE Recipe(
-    [Name]          VARCHAR(30),
-    [Location]      VARCHAR(30),
-    [Details]       VARCHAR(30),
+    [Name]          VARCHAR(100),
+    [Location]      VARCHAR(100),
+    [Details]       VARCHAR(255),
     [Image]         VARCHAR(255),
-    [Category]      VARCHAR(30),
+    [Category]      VARCHAR(100),
     [Population]    INTEGER,
     [Latitude]      NUMERIC(30,6),
     [Longitude]     NUMERIC(30,6)
