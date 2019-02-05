@@ -35,7 +35,7 @@ namespace Mic.CookBook.Web
 
             services.AddSwaggerDocument();
 
-            var connectionString = @"Server=tcp:mic-cookbook.database.windows.net,1433;Initial Catalog=demo;Persist Security Info=False;User ID=aclerbois;Password=*******;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=aspnet-mic-cookbook;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<CookBookContext>(options => options.UseSqlServer(connectionString));
         }
 
