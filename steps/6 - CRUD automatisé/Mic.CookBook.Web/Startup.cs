@@ -36,8 +36,7 @@ namespace Mic.CookBook.Web
             services.AddSwaggerDocument();
 
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=aspnet-mic-cookbook;Trusted_Connection=True;MultipleActiveResultSets=true";
-            services.AddDbContext<CookBookContext>(
-                options => options.UseSqlServer(connectionString));
+            services.AddDbContext<CookBookContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
