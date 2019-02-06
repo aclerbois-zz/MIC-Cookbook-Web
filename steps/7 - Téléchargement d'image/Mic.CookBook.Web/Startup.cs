@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Mic.CookBook.Web.Database;
 using System.Data.Common;
 using Mic.CookBook.Web.Controllers;
+using Mic.CookBook.Web.Helpers;
 
 namespace Mic.CookBook.Web
 {
@@ -33,8 +34,13 @@ namespace Mic.CookBook.Web
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddSwaggerDocument();
+
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=aspnet-mic-cookbook;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<CookBookContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddSingleton<FileSaver>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +61,9 @@ namespace Mic.CookBook.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseSwagger();
+            app.UseSwaggerUi3();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -65,6 +74,10 @@ namespace Mic.CookBook.Web
                     name: "recette-details",
                     template: "recette/{id}/{name}",
                     defaults: new { controller = "Recipe", action = "Details" });
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
